@@ -1,0 +1,9 @@
+body { margin:0; font-family:'Segoe UI', sans-serif; }
+#landing { height:100vh; background:linear-gradient(135deg,#0f172a,#1e293b); color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
+#landing .logo span { color:#38bdf8; }
+button { cursor:pointer; padding:12px 25px; border:none; border-radius:25px; background:#2563eb; color:white; margin-top:20px; }
+#analyzer { display:none; padding:40px; background:#f1f5f9; color:#1e293b; min-height:100vh; }
+.upload-section { background:white; padding:20px; border-radius:15px; margin-top:20px; }
+textarea { width:100%; height:80px; margin-top:10px; padding:10px; }
+.progress { width:50%; background:#e2e8f0; border-radius:20px; height:20px; margin-top:10px; }
+#progressBar { width:0%; height:100%; background:linear-gradient(to right,#22c55e,#16a34a); }
