@@ -1,11 +1,28 @@
-function goToAnalyzer(){
+
+     function goToAnalyzer(){
     document.getElementById("landing").style.display = "none";
     document.getElementById("analyzer").style.display = "block";
+    resetAnalyzer();
 }
 
 function goBack(){
     document.getElementById("landing").style.display = "flex";
     document.getElementById("analyzer").style.display = "none";
+    resetAnalyzer();
+}
+
+// Reset the analyzer for new resume/job description
+function resetAnalyzer(){
+    document.getElementById("resumeFile").value = "";
+    document.getElementById("jobDesc").value = "";
+    document.getElementById("results").style.display = "none";
+    document.getElementById("scoreText").innerText = "0%";
+    document.getElementById("progressBar").style.width = "0%";
+    document.getElementById("headline").innerText = "";
+    document.getElementById("skills").innerText = "";
+    document.getElementById("experience").innerText = "";
+    document.getElementById("education").innerText = "";
+    document.getElementById("jobRoles").innerHTML = "";
 }
 
 function analyzeResume(){
