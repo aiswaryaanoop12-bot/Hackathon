@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResumeAI Professional</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Landing Page -->
+<section id="landing">
+    <div class="logo">ResumeAI <span>Pro</span></div>
+    <h1>Enterprise Resume Intelligence</h1>
+    <p>AI-Powered ATS Optimization & Resume Enhancement</p>
+    <button onclick="goToAnalyzer()">Start Analysis</button>
+</section>
+
+<!-- Analyzer Page -->
+<section id="analyzer">
+    <button onclick="goBack()">← Back</button>
+    <div class="upload-section">
+        <input type="file" id="resumeFile">
+        <textarea id="jobDesc" placeholder="Paste Job Description"></textarea>
+        <button onclick="analyze()">Analyze Resume</button>
+    </div>
+    <div id="results" style="display:none;">
+        <h2>ATS Score: <span id="scoreText">0%</span></h2>
+        <div class="progress"><div id="progressBar"></div></div>
+
+        <h3>Suggested Job Roles:</h3>
+        <ul id="jobRoles"></ul>
+    </div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
