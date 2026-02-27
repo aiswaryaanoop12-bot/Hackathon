@@ -9,34 +9,57 @@ function goBack(){
 }
 
 function analyzeResume(){
-    document.getElementById("results").style.display = "block";
+    const resultsDiv = document.getElementById("results");
+    const resumeFile = document.getElementById("resumeFile").files[0];
+    const jobDesc = document.getElementById("jobDesc").value.toLowerCase();
 
-    // Fake ATS score calculation demo
-    let jobDesc = document.getElementById("jobDesc").value.toLowerCase();
-    let skillsFound = 0;
-    let skills = ["java","python","react","aws","docker","sql"];
-    skills.forEach(s => { if(jobDesc.includes(s)) skillsFound++; });
-    let score = Math.min(100, 50 + skillsFound*8);
-    document.getElementById("scoreText").innerText = score + "%";
-    document.getElementById("progressBar").style.width = score + "%";
+    if(!resumeFile && jobDesc.trim() === ""){
+        alert("Please upload a resume file or paste a job description!");
+        return;
+    }
 
-    // Fill cards
-    document.getElementById("headline").innerText = "Full Stack Developer | Cloud & AI Specialist";
-    document.getElementById("skills").innerText = skillsFound + " relevant skills detected";
-    document.getElementById("experience").innerText = "Use reverse-chronological format; quantify impact";
-    document.getElementById("education").innerText = "Include Degree, University, Year, CGPA";
+    const reader = new FileReader();
 
-    // Suggested Job Roles
-    let roles = [];
-    if(jobDesc.includes("doctor")) roles = ["Medical Officer", "Research Scientist"];
-    else if(jobDesc.includes("developer") || jobDesc.includes("software") || jobDesc.includes("engineer")) roles = ["Software Engineer","Full Stack Developer","Cloud Engineer"];
-    else roles = ["Data Analyst","Project Manager","Consultant"];
+    reader.onload = function(e){
+        let resumeText = e.target.result.toLowerCase();
+        let combinedText = resumeText + " " + jobDesc;
 
-    let ul = document.getElementById("jobRoles");
-    ul.innerHTML = "";
-    roles.forEach(r => {
-        let li = document.createElement("li");
-        li.innerText = r;
-        ul.appendChild(li);
-    });
+        // Fake ATS score calculation
+        let skills = ["java","python","react","aws","docker","sql","c++","html","css"];
+        let skillsFound = 0;
+        skills.forEach(s => { if(combinedText.includes(s)) skillsFound++; });
+        let score = Math.min(100, 50 + skillsFound*8);
+
+        // Show results
+        resultsDiv.style.display = "block";
+        document.getElementById("scoreText").innerText = score + "%";
+        document.getElementById("progressBar").style.width = score + "%";
+
+        // Fill analysis cards
+        document.getElementById("headline").innerText = "Full Stack Developer | Cloud & AI Specialist";
+        document.getElementById("skills").innerText = skillsFound + " relevant skills detected";
+        document.getElementById("experience").innerText = "Use reverse-chronological format; quantify impact";
+        document.getElementById("education").innerText = "Include Degree, University, Year, CGPA";
+
+        // Suggested Job Roles
+        let roles = [];
+        if(combinedText.includes("doctor")) roles = ["Medical Officer", "Research Scientist"];
+        else if(combinedText.includes("developer") || combinedText.includes("software") || combinedText.includes("engineer")) roles = ["Software Engineer","Full Stack Developer","Cloud Engineer"];
+        else roles = ["Data Analyst","Project Manager","Consultant"];
+
+        const ul = document.getElementById("jobRoles");
+        ul.innerHTML = "";
+        roles.forEach(r => {
+            let li = document.createElement("li");
+            li.innerText = r;
+            ul.appendChild(li);
+        });
+    };
+
+    if(resumeFile){
+        reader.readAsText(resumeFile);
+    } else {
+        // If no file, just use job description
+        reader.onload({target:{result:""}});
+    }
 }
